@@ -124,7 +124,7 @@ skills/<skill-name>/
 
 ## Running and testing
 - Single scenario: `python scripts/run.py scenarios/<name>.yaml`
-- With model override: `python scripts/run.py scenarios/<name>.yaml --model openai:gpt-4.1-mini`
+- With model override: `python scripts/run.py scenarios/<name>.yaml --model openai:gpt-5.2`
 - All scenarios: `python scripts/test_scenarios.py`
 - All skill tests: `python scripts/test_skills.py`
 - Compare two runs: `python scripts/compare.py runs/<a> runs/<b>`

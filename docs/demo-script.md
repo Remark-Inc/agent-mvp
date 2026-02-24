@@ -24,7 +24,7 @@ cat skills/research/SKILL.md | head -20
 ## Act 2: Run a Scenario (1.5 min)
 
 ```bash
-AGENT_MODEL=openai:gpt-4o python scripts/run.py scenarios/simple_research.yaml
+AGENT_MODEL=openai:gpt-5.2 python scripts/run.py scenarios/simple_research.yaml
 ```
 
 **Talking points:**
@@ -47,6 +47,7 @@ cat runs/*/trace.md
 
 ```bash
 AGENT_MODEL=openai:gpt-4.1-mini python scripts/run.py scenarios/simple_research.yaml
+# Compare the two runs to see behavioral diff
 python scripts/compare.py runs/<first> runs/<second>
 ```
 

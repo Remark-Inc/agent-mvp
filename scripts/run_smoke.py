@@ -2,7 +2,7 @@
 """Smoke test: send one message, print response, validate model hot-swap.
 
 Usage:
-    AGENT_MODEL=openai:gpt-4o python scripts/run_smoke.py "What is 2+2?"
+    AGENT_MODEL=openai:gpt-5.2 python scripts/run_smoke.py "What is 2+2?"
     python scripts/run_smoke.py --model openai:gpt-4.1-mini "What is 2+2?"
 """
 
@@ -29,7 +29,7 @@ console = Console()
 
 @click.command()
 @click.argument("message")
-@click.option("--model", default=None, help="Model string, e.g. openai:gpt-4o")
+@click.option("--model", default=None, help="Model string, e.g. openai:gpt-5.2")
 def main(message: str, model: str | None) -> None:
     """Send a single message to the agent and print the response."""
     # create_deep_agent returns a CompiledStateGraph directly

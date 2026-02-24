@@ -33,7 +33,7 @@ console = Console()
 
 @click.command()
 @click.argument("scenario_path", type=click.Path(exists=True))
-@click.option("--model", default=None, help="Model override, e.g. openai:gpt-4o")
+@click.option("--model", default=None, help="Model override, e.g. openai:gpt-5.2")
 def main(scenario_path: str, model: str | None) -> None:
     """Run a scenario YAML through the agent with trace capture."""
     # Load scenario

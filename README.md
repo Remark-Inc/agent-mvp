@@ -51,12 +51,12 @@ runs/                # Auto-generated output (gitignored)
 Set `AGENT_MODEL` in `.env` to hot-swap providers:
 
 ```bash
-AGENT_MODEL=openai:gpt-4o              # OpenAI
-AGENT_MODEL=openai:gpt-4.1-mini            # OpenAI (smaller)
+AGENT_MODEL=openai:gpt-5.2              # OpenAI (default)
+AGENT_MODEL=openai:gpt-4.1-mini            # OpenAI (smaller/cheaper)
 AGENT_MODEL=google_genai:gemini-2.0-flash  # Google
 ```
 
-Override per-run: `python scripts/run.py scenario.yaml --model openai:gpt-4o`
+Override per-run: `python scripts/run.py scenario.yaml --model openai:gpt-4.1-mini`
 
 ## Available Skills
 

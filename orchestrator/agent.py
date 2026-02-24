@@ -57,14 +57,14 @@ def build_agent(
     """Build the full agent with skill loader, tools, and subagents.
 
     Args:
-        model_name: Provider:model string (e.g. "openai:gpt-4o").
+        model_name: Provider:model string (e.g. "openai:gpt-5.2").
                     Falls back to AGENT_MODEL env var.
         skills_dir: Path to skills directory.
 
     Returns:
         Tuple of (agent graph, initial_files dict for virtual filesystem).
     """
-    model_str = model_name or os.environ.get("AGENT_MODEL", "openai:gpt-4o")
+    model_str = model_name or os.environ.get("AGENT_MODEL", "openai:gpt-5.2")
     model = init_chat_model(model_str)
 
     # Stage 1: Load skill registry (frontmatter only)
