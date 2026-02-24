@@ -1,0 +1,18 @@
+name: simple-research
+description: >
+  Basic research task to validate end-to-end skill dispatch.
+  The agent should invoke the research-analyst skill and produce findings.
+input:
+  user_request: >
+    Research the current state of AI agent frameworks in 2024-2025.
+    Focus on LangGraph, CrewAI, and AutoGen. Summarize the key
+    differences and which is best suited for production use cases.
+expectations:
+  skills_invoked:
+    - research-analyst
+  behavior: >
+    Agent should use the research skill to search the web, gather findings
+    from multiple sources, and produce a structured JSON response with
+    findings, gaps, and queries used.
+  max_cost_usd: 1.00
+  max_latency_seconds: 120

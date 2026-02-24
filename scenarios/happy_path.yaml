@@ -1,0 +1,21 @@
+name: happy-path
+description: >
+  End-to-end test using research + draft pipeline.
+  Agent should research a topic, then draft a summary report.
+input:
+  user_request: >
+    Research the latest developments in AI agent frameworks
+    (LangGraph, CrewAI, AutoGen) and draft a concise comparison
+    report. The report should cover key features, production readiness,
+    and community adoption. Use the research skill for gathering data,
+    then the draft skill for writing the report.
+expectations:
+  skills_invoked:
+    - research-analyst
+    - draft-writer
+  behavior: >
+    Agent should first invoke research-analyst to gather findings,
+    then use draft-writer to compose a structured report.
+    Final output should be a well-formatted markdown document.
+  max_cost_usd: 2.00
+  max_latency_seconds: 120
