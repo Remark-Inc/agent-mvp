@@ -62,17 +62,24 @@ def main(scenario_path: str, model: str | None) -> None:
     tracer = Tracer()
     tracer.start()
 
+    last_ai_content = "(no response)"
+
     try:
-        # Stream events for tracing
-        final_result = None
         for event in compiled.stream(invoke_state, config, stream_mode="updates"):
             tracer.capture_stream_event(event)
-            # Keep track of latest state
-            final_result = event
 
-        # Also get the final state for the response
-        state = compiled.get_state(config)
-        messages = state.values.get("messages", [])
+            # Extract the latest AI message content from stream events
+            for node_data in event.values():
+                if not isinstance(node_data, dict):
+                    continue
+                msgs = node_data.get("messages", [])
+                if hasattr(msgs, "value"):
+                    msgs = msgs.value
+                if not isinstance(msgs, list):
+                    msgs = [msgs] if msgs else []
+                for msg in msgs:
+                    if getattr(msg, "type", "") == "ai" and getattr(msg, "content", ""):
+                        last_ai_content = msg.content
 
     except Exception as e:
         console.print(f"[bold red]Error:[/] {e}")
@@ -81,12 +88,7 @@ def main(scenario_path: str, model: str | None) -> None:
     finally:
         tracer.stop()
 
-    # Extract response
-    if messages:
-        last_msg = messages[-1]
-        response = last_msg.content if hasattr(last_msg, "content") else str(last_msg)
-    else:
-        response = "(no response)"
+    response = last_ai_content
 
     # Add final output step
     tracer.add_step("final_output", content=response[:3000])

@@ -83,7 +83,18 @@ class Tracer:
             if node_name == "__metadata__":
                 continue
 
+            if not isinstance(node_data, dict):
+                continue
+
             messages = node_data.get("messages", [])
+
+            # LangGraph wraps values in Overwrite objects for reducer state
+            if hasattr(messages, "value"):
+                messages = messages.value
+
+            if not isinstance(messages, list):
+                messages = [messages] if messages else []
+
             for msg in messages:
                 self._process_message(msg, node_name)
 

@@ -17,6 +17,7 @@ import os
 
 from deepagents import create_deep_agent
 from langchain.chat_models import init_chat_model
+from langgraph.checkpoint.memory import InMemorySaver
 
 from orchestrator.skill_loader import (
     build_orchestrator_prompt,
@@ -89,6 +90,7 @@ def build_agent(
         tools=tools,
         subagents=subagents,
         system_prompt=instructions,
+        checkpointer=InMemorySaver(),
     )
 
     return compiled_agent, initial_files
