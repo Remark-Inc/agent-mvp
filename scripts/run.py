@@ -3,7 +3,7 @@
 
 Usage:
     python scripts/run.py scenarios/simple_research.yaml
-    python scripts/run.py scenarios/simple_research.yaml --model anthropic:claude-sonnet-4-20250514
+    python scripts/run.py scenarios/simple_research.yaml --model openai:gpt-4.1-mini
 """
 
 from __future__ import annotations

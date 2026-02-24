@@ -51,7 +51,7 @@ description: Gathers and synthesizes information from web sources.
 version: "1.0"
 metadata:
   dispatch: subagent
-  model: "anthropic:claude-opus-4-6"
+  model: "openai:gpt-4o"
   tools_allowed:
     - web_search
     - fetch_url
@@ -118,7 +118,7 @@ def test_skill_entry_metadata(skills_dir: Path) -> None:
 
     assert research.metadata["dispatch"] == "subagent"
     assert research.metadata["tools_allowed"] == ["web_search", "fetch_url"]
-    assert research.metadata["model"] == "anthropic:claude-opus-4-6"
+    assert research.metadata["model"] == "openai:gpt-4o"
 
 
 def test_skill_entry_full_body(skills_dir: Path) -> None:

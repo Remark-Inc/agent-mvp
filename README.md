@@ -52,7 +52,7 @@ Set `AGENT_MODEL` in `.env` to hot-swap providers:
 
 ```bash
 AGENT_MODEL=openai:gpt-4o              # OpenAI
-AGENT_MODEL=anthropic:claude-sonnet-4-6  # Anthropic
+AGENT_MODEL=openai:gpt-4.1-mini            # OpenAI (smaller)
 AGENT_MODEL=google_genai:gemini-2.0-flash  # Google
 ```
 

@@ -6,7 +6,7 @@
 
 2. **`create_deep_agent` API matches documentation** — takes `model`, `tools`, `sub_agents`, `instructions` as expected. Returns a LangGraph graph that compiles with `InMemorySaver`.
 
-3. **`init_chat_model` is provider-agnostic** — `from langchain.chat_models import init_chat_model` works. Accepts `"provider:model"` format. Validated for openai, anthropic providers.
+3. **`init_chat_model` is provider-agnostic** — `from langchain.chat_models import init_chat_model` works. Accepts `"provider:model"` format. Validated for openai provider.
 
 4. **Subagents are plain dicts** — `{"name", "description", "prompt", "tools"}` format confirmed. No `CompiledSubAgent` class needed (as suspected in API mismatch #1).
 

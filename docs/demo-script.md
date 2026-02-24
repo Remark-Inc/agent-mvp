@@ -5,7 +5,7 @@
 ```bash
 cd projects/agent-mvp
 pip install -e ".[dev]"
-# Ensure .env has at least OPENAI_API_KEY or ANTHROPIC_API_KEY
+# Ensure .env has OPENAI_API_KEY set
 ```
 
 ## Act 1: The Architecture (1 min)
@@ -46,7 +46,7 @@ cat runs/*/trace.md
 ## Act 4: Model Hot-Swap (1 min)
 
 ```bash
-AGENT_MODEL=anthropic:claude-sonnet-4-20250514 python scripts/run.py scenarios/simple_research.yaml
+AGENT_MODEL=openai:gpt-4.1-mini python scripts/run.py scenarios/simple_research.yaml
 python scripts/compare.py runs/<first> runs/<second>
 ```
 

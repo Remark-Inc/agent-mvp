@@ -3,7 +3,7 @@
 
 Usage:
     AGENT_MODEL=openai:gpt-4o python scripts/run_smoke.py "What is 2+2?"
-    python scripts/run_smoke.py --model anthropic:claude-sonnet-4-20250514 "What is 2+2?"
+    python scripts/run_smoke.py --model openai:gpt-4.1-mini "What is 2+2?"
 """
 
 from __future__ import annotations
