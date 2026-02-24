@@ -49,9 +49,8 @@ def main(scenario_path: str, model: str | None) -> None:
     console.print(f"[bold blue]Input:[/] {user_request[:200]}")
     console.print("[dim]---[/]")
 
-    # Build agent
-    agent, initial_files = build_agent(model_name=model_override)
-    compiled = agent.compile(checkpointer=InMemorySaver())
+    # Build agent — create_deep_agent returns a CompiledStateGraph directly
+    compiled, initial_files = build_agent(model_name=model_override)
     config = {"configurable": {"thread_id": f"run-{scenario_name}"}}
 
     # Set up invoke state

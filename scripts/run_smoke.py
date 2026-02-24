@@ -32,15 +32,15 @@ console = Console()
 @click.option("--model", default=None, help="Model string, e.g. openai:gpt-4o")
 def main(message: str, model: str | None) -> None:
     """Send a single message to the agent and print the response."""
-    agent, initial_files = build_agent(model_name=model)
-    compiled = agent.compile(checkpointer=InMemorySaver())
+    # create_deep_agent returns a CompiledStateGraph directly
+    compiled, initial_files = build_agent(model_name=model)
     config = {"configurable": {"thread_id": "smoke-test"}}
 
     console.print(f"[bold blue]Model:[/] {model or 'from AGENT_MODEL env'}")
     console.print(f"[bold blue]Input:[/] {message}")
     console.print("[dim]---[/]")
 
-    invoke_state = {"messages": [{"role": "user", "content": message}]}
+    invoke_state: dict = {"messages": [{"role": "user", "content": message}]}
     if initial_files:
         invoke_state["files"] = initial_files
 

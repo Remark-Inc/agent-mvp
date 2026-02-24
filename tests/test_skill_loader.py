@@ -168,8 +168,9 @@ def test_build_subagents(skills_dir: Path) -> None:
     sa = subagents[0]
     assert sa["name"] == "research-analyst"
     assert sa["description"] == "Gathers and synthesizes information from web sources."
-    assert "# Research Analyst" in sa["prompt"]
-    assert sa["tools"] == ["web_search", "fetch_url"]
+    assert "# Research Analyst" in sa["system_prompt"]
+    # Without tool_resolver, tools key is omitted (subagent inherits all parent tools)
+    assert "tools" not in sa
 
 
 def test_build_subagents_no_tools(skills_dir: Path) -> None:

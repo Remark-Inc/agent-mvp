@@ -125,11 +125,17 @@ def build_skill_files(skills_dir: str = "skills") -> dict[str, str]:
 def build_subagents(
     registry: list[SkillEntry],
     default_model_name: str | None = None,
+    tool_resolver: Any | None = None,
 ) -> list[dict[str, Any]]:
-    """Build deepagents subagent dicts from skills with dispatch: subagent.
+    """Build deepagents SubAgent dicts from skills with dispatch: subagent.
 
-    Each subagent gets the full SKILL.md body as its system prompt.
-    Tool filtering uses the tools_allowed list from frontmatter.
+    Each subagent gets the full SKILL.md body as its system_prompt.
+    Tool filtering uses the tools_allowed list from frontmatter,
+    resolved to actual tool objects via tool_resolver.
+
+    SubAgent TypedDict keys (deepagents 0.4.x):
+      Required: name, description, system_prompt
+      Optional: tools (Sequence[BaseTool]), model, middleware, skills
     """
     subagents: list[dict[str, Any]] = []
 
@@ -140,12 +146,13 @@ def build_subagents(
         subagent: dict[str, Any] = {
             "name": skill.name,
             "description": skill.description,
-            "prompt": skill.full_body,
+            "system_prompt": skill.full_body,
         }
 
         tools_allowed = skill.metadata.get("tools_allowed")
-        if tools_allowed:
-            subagent["tools"] = tools_allowed
+        if tools_allowed and tool_resolver:
+            subagent["tools"] = tool_resolver(tools_allowed)
+        # If no resolver, omit tools — subagent inherits all parent tools
 
         subagents.append(subagent)
 

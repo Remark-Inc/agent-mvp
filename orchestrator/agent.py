@@ -24,7 +24,7 @@ from orchestrator.skill_loader import (
     build_subagents,
     load_skill_registry,
 )
-from orchestrator.tool_registry import get_tools
+from orchestrator.tool_registry import get_tools, get_tools_by_name
 
 
 BASE_INSTRUCTIONS = """\
@@ -78,16 +78,17 @@ def build_agent(
     initial_files = build_skill_files(skills_dir)
 
     # Build subagent configs from dispatch:subagent skills
-    subagents = build_subagents(registry)
+    subagents = build_subagents(registry, tool_resolver=get_tools_by_name)
 
     # Get all registered tools
     tools = get_tools()
 
-    agent = create_deep_agent(
+    # create_deep_agent returns a CompiledStateGraph directly
+    compiled_agent = create_deep_agent(
         model=model,
         tools=tools,
-        sub_agents=subagents,
-        instructions=instructions,
+        subagents=subagents,
+        system_prompt=instructions,
     )
 
-    return agent, initial_files
+    return compiled_agent, initial_files
